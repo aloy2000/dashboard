@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Select, MenuItem, Button, List, ListItem, ListItemText, Table, Pagination, Typography, TableHead, TableBody, TableRow, TableCell, Card, Grid, Container, RadioGroup, FormControlLabel, Radio, Box, Input } from '@mui/material';
+import { Select, MenuItem, Button, List, Checkbox, ListItem, ListItemText, Table, Pagination, Typography, TableHead, TableBody, TableRow, TableCell, Card, Grid, Container, RadioGroup, FormControlLabel, Radio, Box, Input } from '@mui/material';
 import toast, { Toaster } from 'react-hot-toast';
 import { faker } from '@faker-js/faker';
 import { useNavigate } from 'react-router-dom';
@@ -72,6 +72,49 @@ import { useNavigate } from 'react-router-dom';
 //     },
 // ];
 
+const tables = [
+    {
+        id: 1,
+        name: 'Table 1',
+        category: 'Salon',
+    },
+    {
+        id: 2,
+        name: 'Table 1',
+        category: 'Terrase',
+    },
+    {
+        id: 3,
+        name: 'Table 2',
+        category: 'Terrase',
+    },
+    {
+        id: 4,
+        name: 'Table 3',
+        category: 'Terrase',
+    },
+    {
+        id: 5,
+        name: 'Table 2',
+        category: 'Salon',
+    },
+    {
+        id: 6,
+        name: 'Table 3',
+        category: 'Salon',
+    },
+    {
+        id: 7,
+        name: 'Table 1',
+        category: 'Titanic',
+    },
+    {
+        id: 8,
+        name: 'Table 2',
+        category: 'Titanic',
+    },
+];
+
 function Invoice({ order }) {
     const [taxRate] = useState(0.1);
     const subtotal = order.reduce((total, product) => total + product.price, 0);
@@ -124,7 +167,9 @@ export default function OrderPage() {
     const [paymentMethod, setPaymentMethod] = useState('cash');
     const [products, setProducts] = useState([]);
     const [isConfirmed, setIsConfirmed] = useState(false);
-    const [totalPrice, setTotalPrice] = useState(0)
+    const [categories, setCategories] = useState("Salon");
+    const [chambre, setChambre] = useState("chambre 1")
+    const [selectedTables, setSelectedTables] = useState([]);
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -141,6 +186,8 @@ export default function OrderPage() {
     const handleTableChange = (event) => {
         setTable(event.target.value);
     };
+
+    console.log("table:", table);
 
     const handleAddToOrder = (product) => {
         setOrder([...order, product]);
@@ -163,6 +210,24 @@ export default function OrderPage() {
         setPaymentMethod(event.target.value);
     };
 
+
+    const handleCategoryChange = (event) => {
+        const selectedCategories = event.target.value;
+        setCategories(selectedCategories);
+        const tablesToShow = tables.filter(table => selectedCategories.includes(table.category));
+        setSelectedTables(tablesToShow);
+    };
+
+    // const handleTableSelect = (event) => {
+    //     const tableId = event.target.value;
+    //     const isSelected = event.target.checked;
+    //     if (isSelected) {
+    //         setSelectedTables([...selectedTables, tableId]);
+    //     } else {
+    //         setSelectedTables(selectedTables.filter(id => id !== tableId));
+    //     }
+    // };
+
     const handleConfirmOrder = () => {
         if (order.length === 0) {
             toast.error("Vous n'avez pas encore selectionner un menu")
@@ -178,9 +243,10 @@ export default function OrderPage() {
                 id: faker.datatype.uuid(),
                 tableNumber: table,
                 clientName,
-                order, 
+                order,
                 total: totalPrices,
-                status: "paye"
+                status: paymentMethod === "compte" ? "non paye" : "paye",
+                place: paymentMethod === "compte" ? chambre : categories
             })
         })
             .then(response => response.json())
@@ -190,7 +256,7 @@ export default function OrderPage() {
         setIsConfirmed(true);
         navigate('/dashboard/order')
 
-        
+
     };
 
     const startIndex = (page - 1) * rowsPerPage;
@@ -210,12 +276,19 @@ export default function OrderPage() {
                             <Box sx={{ display: 'flex', flexDirection: 'column', paddingBottom: 5 }}>
                                 <Box>
                                     <Typography>Choisir une place</Typography>
-                                    <Select sx={{ marginBottom: 2 }} value={table} onChange={handleTableChange} defaultValue='Table 1'>
-                                        <MenuItem value="Table 1">Table 1</MenuItem>
-                                        <MenuItem value="Table 2">Table 2</MenuItem>
-                                        <MenuItem value="Table 3">Table 3</MenuItem>
-                                        <MenuItem value="Terrase table 1">Terasse - Table 1</MenuItem>
+                                    <Select value={categories} onChange={handleCategoryChange}>
+                                        <MenuItem value="Salon">Salon</MenuItem>
+                                        <MenuItem value="Terrase">Terrase</MenuItem>
+                                        <MenuItem value="Titanic">Titanic</MenuItem>
                                     </Select>
+                                    <List>
+                                        {selectedTables.map((table) => (
+                                            <ListItem key={table.id}>
+                                                <ListItemText primary={table.name} />
+                                                <Checkbox value={table.name} onChange={handleTableChange} />
+                                            </ListItem>
+                                        ))}
+                                    </List>
                                 </Box>
                                 <Input placeholder='Nom du client' onChange={(e) => setClientName(e.target.value)} />
                             </Box>
@@ -234,8 +307,7 @@ export default function OrderPage() {
                                     count={Math.ceil(products.length / rowsPerPage)}
                                     page={page}
                                     onChange={handleChangePage}
-                                    rowsPerPage={rowsPerPage}
-                                    onChangeRowsPerPage={handleChangeRowsPerPage}
+
                                 />
                             )}
                             <RadioGroup value={paymentMethod} onChange={handlePaymentMethodChange} sx={{
@@ -245,7 +317,17 @@ export default function OrderPage() {
                             }}>
                                 <FormControlLabel value="cash" control={<Radio />} label="Espèce" />
                                 <FormControlLabel value="credit" control={<Radio />} label="Chèque" />
+                                <FormControlLabel value="compte" control={<Radio />} label="En compte" />
                             </RadioGroup>
+                            {
+                                paymentMethod === "compte" ? <Box>
+                                    <Select value={chambre} onChange={(e) => setChambre(e.target.value)}>
+                                        <MenuItem value="chambre 1">Chambre 1</MenuItem>
+                                        <MenuItem value="chambre 2">Chambre 2</MenuItem>
+                                        <MenuItem value="chambre 3">Chambre 3</MenuItem>
+                                    </Select>
+                                </Box> : null
+                            }
                             <Typography sx={{ marginTop: 2, textAlign: 'right' }}>Total: {getTotalPrice().toFixed(2)} Ar</Typography>
                             {!isConfirmed && (
                                 <Button variant="contained" onClick={handleConfirmOrder}>
@@ -255,7 +337,7 @@ export default function OrderPage() {
 
                         </Card>
                     </Grid>
-                    <Grid item lg={2} />
+                    <Grid item lg={2} sm={2} xs={12} />
                     <Grid item lg={4}>
                         {order.length > 0 && <Invoice order={order} />}
                     </Grid>

@@ -228,7 +228,7 @@ export default function UserPage() {
 
                         <TableCell align="left">{row.order.length > 0 ? row.order[0].name : "pas de selection"}</TableCell>
 
-                        <TableCell align="left">{row.tableNumber}</TableCell>
+                        <TableCell align="left">{row.tableNumber} - {row.place}</TableCell>
 
                         <TableCell align="left">{row.total} Ar</TableCell>
 

@@ -54,37 +54,20 @@
       "name": "Chicken",
       "price": 8000.99,
       "category": "charcuterie"
+    },
+    {
+      "id": "4acc4c91-0273-4fbf-9dea-601145bd25a0",
+      "name": "lasary",
+      "price": "1200",
+      "category": "Malagasy"
     }
   ],
   "order": [
     {
-      "id": 1,
-      "tableNumber": "Table 1",
-      "clientName": "Rajoanary",
-      "order": [],
-      "total": 4555.99,
-      "status": "paye"
-    },
-    {
-      "id": 2,
-      "tableNumber": "Table 2",
-      "clientName": "Rakoto",
-      "order": [],
-      "total": 4555.99,
-      "status": "paye"
-    },
-    {
-      "id": 3,
-      "tableNumber": "Table 3",
-      "clientName": "Rasoa",
-      "order": [],
-      "total": 4555.99,
-      "status": "paye"
-    },
-    {
       "id": "8901db46-efa1-4578-ba1a-5dfd37c22911",
       "tableNumber": "Table 1",
       "clientName": "tanjona",
+      "place": "Salon",
       "order": [
         {
           "name": "Hamburger",
@@ -99,6 +82,7 @@
       "id": "d34b6eb0-d5af-44c7-98b7-a6677f1bd608",
       "tableNumber": "Table 3",
       "clientName": "anja",
+      "place": "Titaninc",
       "order": [
         {
           "name": "Fish",
@@ -113,6 +97,7 @@
       "id": "4f111403-13b4-4982-ba7f-bccaf1aeaa4a",
       "tableNumber": "Table 3",
       "clientName": "Rabeza",
+      "place": "Salon",
       "order": [
         {
           "name": "Fries",
@@ -127,6 +112,7 @@
       "id": "a1b7571b-8988-446d-8c5f-a15f1d7e5a89",
       "tableNumber": "Table 1",
       "clientName": "test",
+      "place": "Salon",
       "order": [
         {
           "name": "Fries",
@@ -141,6 +127,7 @@
       "id": "d2f91580-84f5-498d-940e-ce84b183a350",
       "tableNumber": "Table 3",
       "clientName": "fy",
+      "place": "Terrase",
       "order": [
         {
           "name": "Hamburger",
@@ -170,6 +157,7 @@
       "id": "57bba8d5-83e8-4b39-b30b-564d53e64c80",
       "tableNumber": "Table 2",
       "clientName": "mad",
+      "place": "Titanic",
       "order": [
         {
           "name": "Hamburger",
@@ -184,6 +172,36 @@
       ],
       "total": 94512.98000000001,
       "status": "payé"
+    },
+    {
+      "id": "680d376b-a4cc-45ae-acae-7345acbaffeb",
+      "tableNumber": "Table 3",
+      "clientName": "Rak",
+      "place": "Titanic",
+      "order": [
+        {
+          "name": "Taco",
+          "price": 700.99,
+          "category": "mexicain"
+        }
+      ],
+      "total": 700.99,
+      "status": "paye"
+    },
+    {
+      "id": "51089ac5-d409-4a93-9d99-c7f3a579d55e",
+      "tableNumber": "Table 1",
+      "clientName": "",
+      "order": [
+        {
+          "name": "Pizza",
+          "price": 12000.99,
+          "category": "italien"
+        }
+      ],
+      "total": 12000.99,
+      "status": "non paye",
+      "place": "chambre 1"
     }
   ]
 }
