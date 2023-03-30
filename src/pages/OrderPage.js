@@ -307,6 +307,7 @@ export default function OrderPage() {
                                     count={Math.ceil(products.length / rowsPerPage)}
                                     page={page}
                                     onChange={handleChangePage}
+                                    
 
                                 />
                             )}

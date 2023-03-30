@@ -20,7 +20,7 @@ export default function AddProduct() {
             body: JSON.stringify({
                 id: faker.datatype.uuid(),
                 name: productName,
-                price,
+                price: Number(price),
                 category
             })
         })

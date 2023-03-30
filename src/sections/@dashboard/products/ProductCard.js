@@ -59,7 +59,7 @@ export default function ShopProductCard({ product }) {
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           {/* <ColorPreview colors={colors} /> */}
           <Typography variant="subtitle1">
-            <Typography
+            {/* <Typography
               component="span"
               variant="body1"
               sx={{
@@ -68,9 +68,9 @@ export default function ShopProductCard({ product }) {
               }}
             >
               {price && fCurrency(price+1500)}
-            </Typography>
-            &nbsp;
-            {fCurrency(price)}
+            </Typography> */}
+            Ar  
+            {price}
           </Typography>
         </Stack>
       </Stack>

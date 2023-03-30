@@ -58,8 +58,20 @@
     {
       "id": "4acc4c91-0273-4fbf-9dea-601145bd25a0",
       "name": "lasary",
-      "price": "1200",
+      "price": 1200,
       "category": "Malagasy"
+    },
+    {
+      "id": "861530b1-8d4a-457e-8030-fb7926630b1b",
+      "name": "vary",
+      "price": 1500,
+      "category": "malagasy"
+    },
+    {
+      "id": "b246658a-9523-466a-8067-7d8c26bb78e5",
+      "name": "snack",
+      "price": 14500,
+      "category": "beignet"
     }
   ],
   "order": [
@@ -202,6 +214,46 @@
       "total": 12000.99,
       "status": "non paye",
       "place": "chambre 1"
+    },
+    {
+      "id": "aa276623-53eb-4cc0-9a1f-44ea3cc6fa8c",
+      "tableNumber": "Table 2",
+      "clientName": "",
+      "order": [
+        {
+          "name": "Pizza",
+          "price": 12000.99,
+          "category": "italien"
+        },
+        {
+          "name": "Taco",
+          "price": 700.99,
+          "category": "mexicain"
+        }
+      ],
+      "total": 12701.98,
+      "status": "non paye",
+      "place": "chambre 3"
+    },
+    {
+      "id": "649ec080-d0ab-419c-9923-8faf4d0f9a73",
+      "tableNumber": "Table 1",
+      "clientName": "emma",
+      "order": [
+        {
+          "name": "Hamburger",
+          "price": 10000.99,
+          "category": "charcuterie"
+        },
+        {
+          "name": "Salad",
+          "price": 84511.99,
+          "category": "legume"
+        }
+      ],
+      "total": 94512.98000000001,
+      "status": "non paye",
+      "place": "chambre 2"
     }
   ]
 }
