@@ -1,0 +1,189 @@
+{
+  "products": [
+    {
+      "name": "Hamburger",
+      "price": 10000.99,
+      "category": "charcuterie"
+    },
+    {
+      "name": "Pizza",
+      "price": 12000.99,
+      "category": "italien"
+    },
+    {
+      "name": "Salad",
+      "price": 84511.99,
+      "category": "legume"
+    },
+    {
+      "name": "Fries",
+      "price": 500.99,
+      "category": "fruits"
+    },
+    {
+      "name": "Taco",
+      "price": 700.99,
+      "category": "mexicain"
+    },
+    {
+      "name": "Pasta",
+      "price": 11000.99,
+      "category": "italien"
+    },
+    {
+      "name": "Sandwich",
+      "price": 6785.99,
+      "category": "fast food"
+    },
+    {
+      "name": "Soup",
+      "price": 4500.99,
+      "category": "Malagasy"
+    },
+    {
+      "name": "Steak",
+      "price": 1500.99,
+      "category": "charcuterie"
+    },
+    {
+      "name": "Fish",
+      "price": 9000.99,
+      "category": "Poisson"
+    },
+    {
+      "name": "Chicken",
+      "price": 8000.99,
+      "category": "charcuterie"
+    }
+  ],
+  "order": [
+    {
+      "id": 1,
+      "tableNumber": "Table 1",
+      "clientName": "Rajoanary",
+      "order": [],
+      "total": 4555.99,
+      "status": "paye"
+    },
+    {
+      "id": 2,
+      "tableNumber": "Table 2",
+      "clientName": "Rakoto",
+      "order": [],
+      "total": 4555.99,
+      "status": "paye"
+    },
+    {
+      "id": 3,
+      "tableNumber": "Table 3",
+      "clientName": "Rasoa",
+      "order": [],
+      "total": 4555.99,
+      "status": "paye"
+    },
+    {
+      "id": "8901db46-efa1-4578-ba1a-5dfd37c22911",
+      "tableNumber": "Table 1",
+      "clientName": "tanjona",
+      "order": [
+        {
+          "name": "Hamburger",
+          "price": 10000.99,
+          "category": "charcuterie"
+        }
+      ],
+      "total": 4555.99,
+      "status": "paye"
+    },
+    {
+      "id": "d34b6eb0-d5af-44c7-98b7-a6677f1bd608",
+      "tableNumber": "Table 3",
+      "clientName": "anja",
+      "order": [
+        {
+          "name": "Fish",
+          "price": 9000.99,
+          "category": "Poisson"
+        }
+      ],
+      "total": 4555.99,
+      "status": "paye"
+    },
+    {
+      "id": "4f111403-13b4-4982-ba7f-bccaf1aeaa4a",
+      "tableNumber": "Table 3",
+      "clientName": "Rabeza",
+      "order": [
+        {
+          "name": "Fries",
+          "price": 500.99,
+          "category": "fruits"
+        }
+      ],
+      "total": 0,
+      "status": "paye"
+    },
+    {
+      "id": "a1b7571b-8988-446d-8c5f-a15f1d7e5a89",
+      "tableNumber": "Table 1",
+      "clientName": "test",
+      "order": [
+        {
+          "name": "Fries",
+          "price": 500.99,
+          "category": "fruits"
+        }
+      ],
+      "total": 500.99,
+      "status": "paye"
+    },
+    {
+      "id": "d2f91580-84f5-498d-940e-ce84b183a350",
+      "tableNumber": "Table 3",
+      "clientName": "fy",
+      "order": [
+        {
+          "name": "Hamburger",
+          "price": 10000.99,
+          "category": "charcuterie"
+        },
+        {
+          "name": "Salad",
+          "price": 84511.99,
+          "category": "legume"
+        },
+        {
+          "name": "Fries",
+          "price": 500.99,
+          "category": "fruits"
+        },
+        {
+          "name": "Taco",
+          "price": 700.99,
+          "category": "mexicain"
+        }
+      ],
+      "total": 95714.96000000002,
+      "status": "payé"
+    },
+    {
+      "id": "57bba8d5-83e8-4b39-b30b-564d53e64c80",
+      "tableNumber": "Table 2",
+      "clientName": "mad",
+      "order": [
+        {
+          "name": "Hamburger",
+          "price": 10000.99,
+          "category": "charcuterie"
+        },
+        {
+          "name": "Salad",
+          "price": 84511.99,
+          "category": "legume"
+        }
+      ],
+      "total": 94512.98000000001,
+      "status": "payé"
+    }
+  ]
+}

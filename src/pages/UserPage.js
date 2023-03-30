@@ -1,7 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 // @mui
 import {
   Card,
@@ -34,10 +36,10 @@ import USERLIST from '../_mock/user';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name', alignRight: false },
-  { id: 'company', label: 'Company', alignRight: false },
-  { id: 'role', label: 'Role', alignRight: false },
-  { id: 'isVerified', label: 'Verified', alignRight: false },
+  { id: 'name', label: 'Client', alignRight: false },
+  { id: 'company', label: 'Plat', alignRight: false },
+  { id: 'role', label: 'Table', alignRight: false },
+  { id: 'isVerified', label: 'Prix total', alignRight: false },
   { id: 'status', label: 'Status', alignRight: false },
   { id: '' },
 ];
@@ -75,6 +77,7 @@ function applySortFilter(array, comparator, query) {
 
 export default function UserPage() {
   const [open, setOpen] = useState(null);
+  const [orders, setOrders] = useState([])
 
   const [page, setPage] = useState(0);
 
@@ -140,30 +143,55 @@ export default function UserPage() {
     setFilterName(event.target.value);
   };
 
+  const deleteOrder = (id) => {
+    fetch(`http://localhost:4000/order/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
+  }
+
+  console.log("orders:", orders)
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
 
   const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
 
   const isNotFound = !filteredUsers.length && !!filterName;
 
+  useEffect(() => {
+    fetch('http://localhost:4000/order')
+      .then(response => response.json())
+      .then(data => setOrders(data))
+      .catch(error => console.error(error));
+
+  }, [])
+
+
   return (
     <>
       <Helmet>
-        <title> User | Minimal UI </title>
+        <title> Order</title>
       </Helmet>
 
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            User
+            Effectuer une commande
           </Typography>
-          <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button>
+          <Link style={{ textDecoration: "none", color: "white" }} to={'/dashboard/orderPage'}>
+            <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
+              Nouvelle commande
+            </Button>
+          </Link>
         </Stack>
 
         <Card>
-          <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
+          {/* <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} /> */}
 
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
@@ -178,33 +206,34 @@ export default function UserPage() {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, status, company, avatarUrl, isVerified } = row;
-                    const selectedUser = selected.indexOf(name) !== -1;
+                  {orders.map((row, index) => {
+
+                    const selectedUser = selected.indexOf(row.clientName) !== -1;
+                    const avatarUrl = `/assets/images/avatars/avatar_${index + 1}.jpg`
 
                     return (
-                      <TableRow hover key={id} tabIndex={-1} role="checkbox" selected={selectedUser}>
+                      <TableRow hover key={row.id} tabIndex={-1} role="checkbox" selected={selectedUser}>
                         <TableCell padding="checkbox">
-                          <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, name)} />
+                          <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, row.clientName)} />
                         </TableCell>
 
                         <TableCell component="th" scope="row" padding="none">
                           <Stack direction="row" alignItems="center" spacing={2}>
-                            <Avatar alt={name} src={avatarUrl} />
+                            <Avatar alt={row.clientName} src={avatarUrl} />
                             <Typography variant="subtitle2" noWrap>
-                              {name}
+                              {row.clientName}
                             </Typography>
                           </Stack>
                         </TableCell>
 
-                        <TableCell align="left">{company}</TableCell>
+                        <TableCell align="left">{row.order.length > 0 ? row.order[0].name : "pas de selection"}</TableCell>
 
-                        <TableCell align="left">{role}</TableCell>
+                        <TableCell align="left">{row.tableNumber}</TableCell>
 
-                        <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
+                        <TableCell align="left">{row.total} Ar</TableCell>
 
                         <TableCell align="left">
-                          <Label color={(status === 'banned' && 'error') || 'success'}>{sentenceCase(status)}</Label>
+                          <Label color={(row.status === 'non paye' && 'error') || 'success'}>{sentenceCase(row.status)}</Label>
                         </TableCell>
 
                         <TableCell align="right">

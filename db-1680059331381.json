@@ -1,0 +1,59 @@
+{
+  "products": [
+    {
+      "name": "Hamburger",
+      "price": 10000.99,
+      "category": "charcuterie"
+    },
+    {
+      "name": "Pizza",
+      "price": 12000.99,
+      "category": "italien"
+    },
+    {
+      "name": "Salad",
+      "price": 84511.99,
+      "category": "legume"
+    },
+    {
+      "name": "Fries",
+      "price": 500.99,
+      "category": "fruits"
+    },
+    {
+      "name": "Taco",
+      "price": 700.99,
+      "category": "mexicain"
+    },
+    {
+      "name": "Pasta",
+      "price": 11000.99,
+      "category": "italien"
+    },
+    {
+      "name": "Sandwich",
+      "price": 6785.99,
+      "category": "fast food"
+    },
+    {
+      "name": "Soup",
+      "price": 4500.99,
+      "category": "Malagasy"
+    },
+    {
+      "name": "Steak",
+      "price": 1500.99,
+      "category": "charcuterie"
+    },
+    {
+      "name": "Fish",
+      "price": 9000.99,
+      "category": "Poisson"
+    },
+    {
+      "name": "Chicken",
+      "price": 8000.99,
+      "category": "charcuterie"
+    }
+  ]
+}
